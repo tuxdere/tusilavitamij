@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07040b">
+  <meta name="description" content="Un piccolo messaggio d'amore fatto di luce: Ti amo. Tu si la vita mij.">
+  <meta name="color-scheme" content="dark">
+  <title>Sei piccola ♡</title>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTYiIGZpbGw9IiMxNDA2MTkiLz4KICA8cGF0aCBkPSJNMzIgNTNDMTYgNDEgOSAzMiA5IDIyYzAtNyA1LTEyIDEyLTEyIDUgMCA5IDIgMTEgNyAzLTUgNy03IDEyLTcgNyAwIDEyIDUgMTIgMTIgMCAxMC03IDE5LTI0IDMxWiIgZmlsbD0iI2ZmNWI5ZiIvPgogIDxwYXRoIGQ9Ik0xNiAyMWMyLTUgNi02IDEwLTQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmYjJkMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2Utd2lkdGg9IjMiLz4KPC9zdmc+Cg==" type="image/svg+xml">
+  <style>
+:root {
+  color-scheme: dark;
+  --bg: #07040b;
+  --pink: #ff6fae;
+  --soft-pink: #ffd0e5;
+  --muted: #d99bb9;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { width: 100%; min-height: 100%; margin: 0; }
+html { background: var(--bg); }
+body {
+  color: #ffe4ef;
+  background: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; }
+.experience {
+  position: relative;
+  width: 100%; height: 100vh; height: 100svh;
+  min-height: 320px; isolation: isolate;
+  overflow: hidden; touch-action: manipulation;
+  background:
+    radial-gradient(ellipse 50% 44% at 50% 51%, rgba(74, 9, 48, .24), transparent 84%),
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(57, 15, 59, .17), transparent 75%),
+    #07040b;
+}
+.canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.canvas--rain { z-index: 1; opacity: .78; }
+.canvas--particles { z-index: 4; }
+.atmosphere {
+  position: absolute; z-index: 2; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 37% 43% at 50% 46%, rgba(7, 4, 11, .63), rgba(7,4,11,.11) 78%, transparent 100%);
+}
+.atmosphere::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 50% 46%, transparent 25%, rgba(5,2,9,.29) 72%, rgba(5,2,9,.83) 105%);
+}
+.center-glow {
+  position: absolute; z-index: 3; top: 50%; left: 50%; width: min(75vw, 590px); aspect-ratio: 1;
+  transform: translate(-50%, -50%); pointer-events: none;
+  background: radial-gradient(circle, rgba(244, 65, 140, .10), rgba(199, 32, 109, .04) 39%, transparent 69%);
+  filter: blur(17px); animation: glow-breathe 4s ease-in-out infinite alternate;
+}
+.topline {
+  z-index: 6; position: absolute; left: 0; right: 0; top: 0;
+  display: flex; align-items: center; justify-content: center; gap: 19px;
+  padding: calc(env(safe-area-inset-top) + 32px) 20px 0;
+  color: rgba(255, 185, 215, .68); font-size: 10px; font-weight: 700;
+  letter-spacing: .36em; text-transform: uppercase;
+  pointer-events: none; text-align: center;
+  animation: appear 1.4s ease both;
+}
+.topline__ornament { font-size: 12px; color: rgba(255, 143, 193, .73); }
+.ending {
+  position: absolute; z-index: 5; left: 50%; top: 49.2%; width: min(88%, 560px);
+  transform: translate(-50%, -42%) scale(.9);
+  display: grid; align-items: center; justify-items: center; text-align: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 1100ms ease, transform 1400ms cubic-bezier(.2,.8,.2,1);
+}
+.ending.is-visible { opacity: 1; transform: translate(-50%, -42%) scale(1); }
+.ending__eyebrow {
+  color: rgba(255, 205, 227, .78); font-size: clamp(9px, 2.35vw, 11px);
+  text-transform: uppercase; letter-spacing: .25em; margin: 0 0 15px;
+  opacity: 0; transform: translateY(10px);
+}
+.ending__title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic; font-weight: 600; font-size: clamp(55px, 12vw, 98px);
+  letter-spacing: -.055em; margin: 0; line-height: 1.08;
+  color: #ffe5ef;
+  text-shadow: 0 0 12px rgba(255, 82, 154, .8), 0 0 40px rgba(255, 62, 142, .43), 0 0 78px rgba(255, 53, 121, .24);
+  opacity: 0; transform: translateY(12px);
+  white-space: nowrap;
+}
+.ending__heart {
+  font-family: "Segoe UI Symbol", sans-serif; font-size: .30em; font-style: normal;
+  vertical-align: super; padding-left: .4em; color: #ff5e9c;
+  filter: drop-shadow(0 0 12px rgba(255,70,143,.8));
+}
+.ending__phrase {
+  display: flex; flex-wrap: wrap; justify-content: center; column-gap: .24em; row-gap: .04em;
+  max-width: 100%; margin: 12px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(22px, 5.1vw, 34px); line-height: 1.3;
+  font-style: italic; color: #ffb5d4; text-shadow: 0 0 24px rgba(255,94,153,.52);
+}
+.ending__phrase span { display: inline-block; opacity: 0; transform: translateY(15px) scale(.95); }
+.ending__sparkle { opacity: 0; margin-top: 17px; color: rgba(255, 148, 197, .72); font-size: 15px; letter-spacing: .4em; }
+.ending.is-visible .ending__eyebrow { animation: rise 900ms 120ms forwards; }
+.ending.is-visible .ending__title { animation: rise 1000ms 290ms forwards; }
+.ending.is-visible .ending__phrase span { animation: rise 650ms forwards; }
+.ending.is-visible .ending__phrase span:nth-child(1) { animation-delay: 900ms; }
+.ending.is-visible .ending__phrase span:nth-child(2) { animation-delay: 1130ms; }
+.ending.is-visible .ending__phrase span:nth-child(3) { animation-delay: 1360ms; }
+.ending.is-visible .ending__phrase span:nth-child(4) { animation-delay: 1590ms; }
+.ending.is-visible .ending__phrase span:nth-child(5) { animation-delay: 1820ms; }
+.ending.is-visible .ending__sparkle { animation: appear 1400ms 2200ms forwards; }
+.footer {
+  position: absolute; z-index: 7; left: 0; right: 0; bottom: 0;
+  padding: 0 max(24px, env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 24px) max(24px, env(safe-area-inset-left));
+  display: flex; justify-content: space-between; align-items: end; gap: 12px;
+}
+.footer__prompt {
+  max-width: 245px; color: rgba(252, 174, 207, .57);
+  font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 13px;
+  line-height: 1.45; text-shadow: 0 0 12px rgba(0,0,0,.6);
+}
+.replay {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  min-width: 101px; min-height: 44px; padding: 10px 17px;
+  border-radius: 999px; border: 1px solid rgba(255, 156, 197, .37);
+  background: rgba(62, 19, 47, .36); color: #ffdfed;
+  box-shadow: 0 4px 26px rgba(0,0,0,.23), inset 0 0 18px rgba(253, 89, 148, .06);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .05em;
+  transition: transform .2s, background .2s, border-color .2s;
+}
+.replay svg { width: 16px; height: 16px; }
+.replay:hover { background: rgba(97, 30, 68, .52); transform: translateY(-2px); border-color: rgba(255, 193, 221, .58); }
+.replay:active { transform: scale(.97); }
+.replay:focus-visible { outline: 2px solid #ffc5e0; outline-offset: 4px; }
+.touch-hearts { z-index: 8; position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.tap-heart {
+  position: absolute; top: 0; left: 0; font-size: var(--size, 17px); color: var(--color, #ff8fbe);
+  text-shadow: 0 0 18px #ff4a96; transform: translate(-50%, -50%);
+  animation: heart-fly 1700ms cubic-bezier(.2,.6,.3,1) both; will-change: transform, opacity;
+}
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@keyframes appear { to { opacity: 1; } }
+@keyframes rise { to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes glow-breathe { from { opacity: .55; transform: translate(-50%, -50%) scale(.88); } to { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } }
+@keyframes heart-fly {
+  0% { opacity: 0; transform: translate(-50%,-50%) scale(.5); }
+  18% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx, 10px)), calc(-50% - var(--dy, 115px))) rotate(var(--rotate, 15deg)) scale(1.4); }
+}
+@media (max-width: 540px) {
+  .topline { padding-top: calc(env(safe-area-inset-top) + 23px); letter-spacing: .22em; font-size: 9px; gap: 12px; }
+  .ending { width: min(90%, 350px); top: 49.2%; }
+  .ending__eyebrow { letter-spacing: .15em; margin-bottom: 11px; }
+  .ending__title { font-size: clamp(58px, 14vw, 75px); }
+  .ending__phrase { font-size: clamp(21px, 5.4vw, 27px); margin-top: 9px; }
+  .footer { padding-left: 18px; padding-right: 18px; padding-bottom: calc(env(safe-area-inset-bottom) + 18px); }
+  .footer__prompt { max-width: 155px; font-size: 11px; }
+  .replay { min-width: 92px; }
+}
+@media (max-height: 530px) {
+  .ending { top: 52%; }
+  .ending__eyebrow { display: none; }
+  .ending__title { font-size: clamp(40px, 8vh, 64px); }
+  .ending__phrase { font-size: clamp(16px, 4vh, 26px); margin-top: 4px; }
+  .ending__sparkle { display: none; }
+  .topline { padding-top: 12px; }
+  .footer { padding-bottom: calc(env(safe-area-inset-bottom) + 10px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .center-glow { animation: none; }
+  .topline, .ending.is-visible .ending__eyebrow, .ending.is-visible .ending__title,
+  .ending.is-visible .ending__phrase span, .ending.is-visible .ending__sparkle { animation: none !important; opacity: 1; transform: none; }
+  .ending { transition: none; }
+  .tap-heart { display: none; }
+  .replay { transition: none; }
+}
+
+</style>
+
+</head>
+<body>
+  <main id="experience" class="experience" aria-label="Animazione romantica con conto alla rovescia">
+    <canvas id="rain" class="canvas canvas--rain" aria-hidden="true"></canvas>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <canvas id="particles" class="canvas canvas--particles" aria-hidden="true"></canvas>
+    <div id="touch-hearts" class="touch-hearts" aria-hidden="true"></div>
+
+    <div class="center-glow" aria-hidden="true"></div>
+
+    <section id="ending" class="ending" aria-hidden="true" aria-label="Messaggio finale">
+      <h1 class="ending__title">Ti amo</h1>
+      <p class="ending__phrase" aria-label="In questa vita come in tutte le altre">
+        <span>Mi</span> <span>manchi</span> <span>tanto</span>
+      </p>
+      <div class="ending__sparkle" aria-hidden="true">✧ &nbsp; ♡ &nbsp; ✧</div>
+    </section>
+
+    <div id="announce" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <footer class="footer">
+      <div class="footer__prompt" id="hint" aria-hidden="true">una parola alla volta</div>
+      <button class="replay" id="replay" type="button" aria-label="Ricomincia l'animazione">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4.6 10A7.5 7.5 0 1 1 4.5 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m4 5 .7 5.1L9.8 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Rivedi</span>
+      </button>
+    </footer>
+  </main>
+<script>
+/**
+ * Ti amo — Tu si la vita mij
+ * Reinterpretazione originale dell'effetto Word Love Code (FIQTOR):
+ * pioggia rosa Matrix + morphing di particelle + cuore finale.
+ * Nessuna libreria esterna, nessun asset remoto, nessun tracciamento.
+ */
+(() => {
+  'use strict';
+
+  // MODIFICA QUI il testo o la velocità della tua dedica.
+  const SETTINGS = Object.freeze({
+    countdownFrom: 3,
+    countdownDuration: 1100,
+    wordDuration: 1620,
+    words: ['Tu', 'si', 'la', 'vita', 'mij'],
+    rainText: 'TI AMO  ♥  TI AMO  ♡  ',
+    finalRevealDelay: 900,
+  });
+
+  const rainCanvas = document.getElementById('rain');
+  const particleCanvas = document.getElementById('particles');
+  const ending = document.getElementById('ending');
+  const replay = document.getElementById('replay');
+  const announce = document.getElementById('announce');
+  const touchHearts = document.getElementById('touch-hearts');
+  const experience = document.getElementById('experience');
+  const rainCtx = rainCanvas.getContext('2d', { alpha: true });
+  const ctx = particleCanvas.getContext('2d', { alpha: true });
+  const sampler = document.createElement('canvas');
+  const samplerCtx = sampler.getContext('2d', { willReadFrequently: true });
+  if (!rainCtx || !ctx || !samplerCtx) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let w = 0;
+  let h = 0;
+  let dpr = 1;
+  let mobile = false;
+  let drops = [];
+  let stars = [];
+  let particles = [];
+  let currentText = '';
+  let scene = 'text';
+  let heartStartedAt = 0;
+  let lastFrame = 0;
+  let lastRain = 0;
+  let animationHandle = 0;
+  let stageTimeout = 0;
+  let stageEndTime = 0;
+  let stageRemaining = 0;
+  let pendingStage = null;
+  let resetTimer = 0;
+  let currentIndex = 0;
+  let lastTap = 0;
+  let autoPaused = false;
+
+  const colorPalette = ['#ff82b7', '#ff579f', '#ffc5de', '#fa408d', '#f9a5ce'];
+  const rnd = (min, max) => Math.random() * (max - min) + min;
+
+  function setCanvasSize(canvas, context) {
+    canvas.width = Math.ceil(w * dpr);
+    canvas.height = Math.ceil(h * dpr);
+    context.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function rebuildRain() {
+    const fontSize = mobile ? 13 : 15;
+    const gap = fontSize + (mobile ? 8 : 10);
+    const count = Math.ceil(w / gap);
+    drops = Array.from({ length: count }, (_, i) => ({
+      x: i * gap + rnd(-2, 3),
+      y: rnd(-h, h),
+      step: Math.floor(rnd(0, SETTINGS.rainText.length)),
+      speed: rnd(.60, 1.32),
+      fontSize,
+      offset: rnd(0, 1000),
+      isBright: i % 7 === 0,
+    }));
+  }
+
+  function rebuildStars() {
+    const count = mobile ? 40 : 78;
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      radius: rnd(.4, 1.35),
+      phase: rnd(0, Math.PI * 2),
+      pulse: rnd(.4, 1.2),
+    }));
+  }
+
+  function resize() {
+    const oldW = w;
+    const oldH = h;
+    w = Math.max(1, experience.clientWidth);
+    h = Math.max(1, experience.clientHeight);
+    mobile = w < 650;
+    // Limite della risoluzione interna per non sovraccaricare gli smartphone.
+    dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 1.75);
+    setCanvasSize(rainCanvas, rainCtx);
+    setCanvasSize(particleCanvas, ctx);
+    rebuildRain();
+    rebuildStars();
+    if (oldW && oldH) {
+      for (const p of particles) {
+        p.x *= w / oldW;
+        p.y *= h / oldH;
+      }
+    }
+    if (scene === 'heart') setTargets(heartShape(), true);
+    else if (currentText) setTargets(textShape(currentText), true);
+  }
+
+  function textShape(text) {
+    const maxWidth = Math.max(100, w * (mobile ? .81 : .69));
+    let size = Math.min(w * .44, h * .27, mobile ? 150 : 196);
+    size = Math.max(46, size);
+    samplerCtx.font = `800 ${size}px Arial, Helvetica, sans-serif`;
+    while (samplerCtx.measureText(text).width > maxWidth && size > 20) {
+      size -= 2;
+      samplerCtx.font = `800 ${size}px Arial, Helvetica, sans-serif`;
+    }
+    const textWidth = samplerCtx.measureText(text).width;
+    const sw = Math.ceil(textWidth + 40);
+    const sh = Math.ceil(size * 1.65 + 20);
+    sampler.width = sw;
+    sampler.height = sh;
+    samplerCtx.textAlign = 'center';
+    samplerCtx.textBaseline = 'middle';
+    samplerCtx.fillStyle = '#ffffff';
+    samplerCtx.font = `800 ${size}px Arial, Helvetica, sans-serif`;
+    samplerCtx.fillText(text, sw / 2, sh / 2 + size * .055);
+    const data = samplerCtx.getImageData(0, 0, sw, sh).data;
+    const step = mobile ? 3 : 4;
+    const result = [];
+    const xOffset = w / 2 - sw / 2;
+    const yOffset = h * .485 - sh / 2;
+    for (let y = 0; y < sh; y += step) {
+      for (let x = 0; x < sw; x += step) {
+        if (data[(y * sw + x) * 4 + 3] > 125) {
+          result.push({ x: xOffset + x, y: yOffset + y });
+        }
+      }
+    }
+    // Mescola i punti: i singoli puntini attraversano lo schermo quando il testo cambia.
+    for (let i = result.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+  }
+
+  function heartCoordinates(t) {
+    // Formula classica della curva a cuore, scalata per il viewport.
+    const x = 16 * Math.pow(Math.sin(t), 3);
+    const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+    return { x, y: -y };
+  }
+
+  function heartScale() {
+    const width = Math.min(w * (mobile ? .86 : .58), h * .81, 555);
+    return width / 32;
+  }
+
+  function heartShape() {
+    const result = [];
+    const cx = w / 2;
+    const cy = h * .49;
+    const scale = heartScale();
+    const count = mobile ? 680 : 980;
+    for (let i = 0; i < count; i++) {
+      const t = (i / count) * Math.PI * 2;
+      const pos = heartCoordinates(t);
+      const spread = rnd(-.07, .07);
+      result.push({
+        x: cx + pos.x * scale * (1 + spread),
+        y: cy + pos.y * scale * (1 + spread),
+      });
+    }
+    return result;
+  }
+
+  function setTargets(rawTargets, resizing = false) {
+    const limit = mobile ? 720 : 1040;
+    const targets = rawTargets.length > limit
+      ? rawTargets.filter((_, i) => i % Math.ceil(rawTargets.length / limit) === 0)
+      : rawTargets;
+    const number = targets.length;
+    while (particles.length < number) {
+      const angle = rnd(0, Math.PI * 2);
+      const dist = rnd(Math.min(w, h) * .17, Math.max(w, h) * .53);
+      particles.push({
+        x: w / 2 + Math.cos(angle) * dist,
+        y: h / 2 + Math.sin(angle) * dist,
+        tx: w / 2, ty: h / 2,
+        vx: 0, vy: 0,
+        alpha: 0, targetAlpha: 0,
+        radius: rnd(1.15, 2.35),
+        color: colorPalette[Math.floor(rnd(0, colorPalette.length))],
+        twinkle: rnd(0, 6.283),
+      });
+    }
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      if (i < number) {
+        p.tx = targets[i].x;
+        p.ty = targets[i].y;
+        p.targetAlpha = 1;
+        if (reducedMotion.matches) {
+          p.x = p.tx; p.y = p.ty; p.vx = 0; p.vy = 0; p.alpha = 1;
+        }
+      } else {
+        // Particelle non necessarie alla parola corrente: scompaiono dolcemente.
+        p.targetAlpha = 0;
+        if (!resizing) {
+          p.tx = w / 2 + Math.cos(i * 3.31) * w * .43;
+          p.ty = h / 2 + Math.sin(i * 2.77) * h * .44;
+        }
+      }
+    }
+  }
+
+  function showText(text) {
+    scene = 'text';
+    currentText = text;
+    setTargets(textShape(text));
+    announce.textContent = text;
+  }
+
+  function showHeart() {
+    scene = 'heart';
+    currentText = '';
+    heartStartedAt = performance.now();
+    setTargets(heartShape());
+    stageTimeout = window.setTimeout(() => {
+      ending.classList.add('is-visible');
+      ending.setAttribute('aria-hidden', 'false');
+      announce.textContent = 'Ti amo. Tu si la vita mij.';
+    }, reducedMotion.matches ? 0 : SETTINGS.finalRevealDelay);
+  }
+
+  const sequence = [
+    ...Array.from({ length: SETTINGS.countdownFrom }, (_, i) => ({
+      text: String(SETTINGS.countdownFrom - i), duration: SETTINGS.countdownDuration,
+    })),
+    ...SETTINGS.words.map(word => ({ text: word, duration: SETTINGS.wordDuration })),
+  ];
+
+  function schedule(next, delay) {
+    pendingStage = next;
+    stageRemaining = Math.max(0, delay);
+    stageEndTime = performance.now() + stageRemaining;
+    stageTimeout = window.setTimeout(() => {
+      stageTimeout = 0;
+      pendingStage = null;
+      next();
+    }, stageRemaining);
+  }
+
+  function stepSequence() {
+    if (currentIndex >= sequence.length) { showHeart(); return; }
+    const part = sequence[currentIndex++];
+    showText(part.text);
+    schedule(stepSequence, part.duration);
+  }
+
+  function start() {
+    window.clearTimeout(stageTimeout);
+    window.clearTimeout(resetTimer);
+    pendingStage = null;
+    currentIndex = 0;
+    heartStartedAt = 0;
+    ending.classList.remove('is-visible');
+    ending.setAttribute('aria-hidden', 'true');
+    // Rimuove e riapplica le animazioni CSS per farle ripartire al replay.
+    void ending.offsetWidth;
+    if (reducedMotion.matches) { showHeart(); return; }
+    stepSequence();
+  }
+
+  function paintRain(now) {
+    if (reducedMotion.matches) return;
+    const refresh = mobile ? 47 : 39;
+    if (now - lastRain < refresh) return;
+    lastRain = now;
+    // Velo scuro traslucido: le lettere lasciano una scia, come nell'originale.
+    rainCtx.fillStyle = 'rgba(7, 4, 11, .105)';
+    rainCtx.fillRect(0, 0, w, h);
+    for (const drop of drops) {
+      const size = drop.fontSize;
+      rainCtx.font = `600 ${size}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
+      rainCtx.textBaseline = 'top';
+      const symbol = SETTINGS.rainText[drop.step % SETTINGS.rainText.length];
+      rainCtx.fillStyle = drop.isBright ? 'rgba(255, 181, 212, .88)' : 'rgba(255, 79, 149, .69)';
+      rainCtx.fillText(symbol, drop.x, drop.y);
+      drop.y += size * drop.speed;
+      drop.step += 1;
+      if (drop.y > h + rnd(20, 260)) {
+        drop.y = rnd(-h * .37, -20);
+        drop.speed = rnd(.64, 1.32);
+        drop.step = Math.floor(rnd(0, SETTINGS.rainText.length));
+      }
+    }
+  }
+
+  function paintStars(now) {
+    ctx.save();
+    for (const star of stars) {
+      const shimmer = .18 + .20 * (1 + Math.sin(now * .001 * star.pulse + star.phase));
+      ctx.fillStyle = `rgba(255,188,219,${shimmer.toFixed(3)})`;
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function paintHeartLine(now) {
+    const alive = Math.min(1, (now - heartStartedAt) / 1650);
+    if (alive <= 0) return;
+    const scale = heartScale();
+    const breath = 1 + Math.sin(now * .0015) * .016;
+    ctx.save();
+    ctx.beginPath();
+    for (let i = 0; i <= 250; i++) {
+      const pos = heartCoordinates((i / 250) * Math.PI * 2);
+      const x = w / 2 + pos.x * scale * breath;
+      const y = h * .49 + pos.y * scale * breath;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.lineWidth = mobile ? 1.25 : 1.6;
+    ctx.strokeStyle = `rgba(255,77,154,${(.18 * alive).toFixed(3)})`;
+    ctx.shadowColor = '#fc4c98';
+    ctx.shadowBlur = 22;
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function paintParticles(now, dt) {
+    ctx.clearRect(0, 0, w, h);
+    paintStars(now);
+    if (scene === 'heart') paintHeartLine(now);
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    const factor = Math.min(dt / 16.67, 2);
+    const breath = scene === 'heart' ? 1 + Math.sin(now * .0015) * .016 : 1;
+    const cx = w / 2;
+    const cy = h * .49;
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      const tx = scene === 'heart' ? cx + (p.tx - cx) * breath : p.tx;
+      const ty = scene === 'heart' ? cy + (p.ty - cy) * breath : p.ty;
+      if (!reducedMotion.matches) {
+        p.vx = (p.vx + (tx - p.x) * .021 * factor) * Math.pow(.81, factor);
+        p.vy = (p.vy + (ty - p.y) * .021 * factor) * Math.pow(.81, factor);
+        p.x += p.vx * factor;
+        p.y += p.vy * factor;
+        p.alpha += (p.targetAlpha - p.alpha) * Math.min(1, .13 * factor);
+      }
+      if (p.alpha < .018) continue;
+      const sparkle = .85 + Math.sin(now * .0023 + p.twinkle) * .15;
+      ctx.globalAlpha = p.alpha * sparkle;
+      ctx.fillStyle = p.color;
+      if (i % 24 === 0) {
+        ctx.shadowColor = p.color;
+        ctx.shadowBlur = 8;
+      } else {
+        ctx.shadowBlur = 0;
+      }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function frame(now) {
+    animationHandle = window.requestAnimationFrame(frame);
+    const minInterval = mobile ? 32 : 29;
+    if (now - lastFrame < minInterval) return;
+    const dt = lastFrame ? Math.min(now - lastFrame, 45) : 16;
+    lastFrame = now;
+    paintRain(now);
+    paintParticles(now, dt);
+  }
+
+  function floatHearts(event) {
+    if (reducedMotion.matches || event.target.closest('button')) return;
+    const now = performance.now();
+    if (now - lastTap < 180) return;
+    lastTap = now;
+    const rect = experience.getBoundingClientRect();
+    for (let i = 0; i < 6; i++) {
+      const heart = document.createElement('span');
+      heart.className = 'tap-heart';
+      heart.textContent = i % 3 === 0 ? '♡' : '♥';
+      heart.style.left = `${event.clientX - rect.left + rnd(-22, 22)}px`;
+      heart.style.top = `${event.clientY - rect.top + rnd(-10, 10)}px`;
+      heart.style.setProperty('--size', `${rnd(12, 23).toFixed(0)}px`);
+      heart.style.setProperty('--dx', `${rnd(-75, 75).toFixed(0)}px`);
+      heart.style.setProperty('--dy', `${rnd(60, 185).toFixed(0)}px`);
+      heart.style.setProperty('--rotate', `${rnd(-45, 45).toFixed(0)}deg`);
+      heart.style.setProperty('--color', colorPalette[i % colorPalette.length]);
+      heart.style.animationDelay = `${i * 65}ms`;
+      touchHearts.append(heart);
+      heart.addEventListener('animationend', () => heart.remove(), { once: true });
+    }
+  }
+
+  window.addEventListener('resize', () => {
+    window.clearTimeout(resetTimer);
+    resetTimer = window.setTimeout(resize, 100);
+  }, { passive: true });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      window.cancelAnimationFrame(animationHandle);
+      animationHandle = 0;
+      autoPaused = true;
+      if (stageTimeout && pendingStage) {
+        stageRemaining = Math.max(0, stageEndTime - performance.now());
+        window.clearTimeout(stageTimeout);
+      }
+    } else if (autoPaused) {
+      autoPaused = false;
+      lastFrame = 0;
+      lastRain = 0;
+      animationHandle = window.requestAnimationFrame(frame);
+      if (pendingStage) schedule(pendingStage, stageRemaining);
+    }
+  });
+
+  replay.addEventListener('click', start);
+  experience.addEventListener('pointerdown', floatHearts, { passive: true });
+  reducedMotion.addEventListener?.('change', start);
+  resize();
+  start();
+  animationHandle = window.requestAnimationFrame(frame);
+})();
+
+</script>
+</body>
+</html>
